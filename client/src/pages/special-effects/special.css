@@ -1,0 +1,76 @@
+
+  .menu {
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 2px;
+    line-height: 25px;
+
+    width: 150px;
+    height: auto;
+    position: absolute;
+    list-style: none;
+    box-shadow: 0 0 20px 0 #ccc;
+    opacity: 1;
+    transition: opacity 0.8s linear;
+    z-index: 99;
+    padding-left: 12px !important;
+    padding-top: 10px;
+    border-radius: 15px;
+    border:1px solid grey;
+  }
+  .menu > li > a {
+    font: inherit;
+    border: 0;
+    padding: 10px 30px 10px 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: unset;
+    color: #000;
+    font-weight: 500;
+    transition: 0.5s linear;
+    -webkit-transition: 0.5s linear;
+    -moz-transition: 0.5s linear;
+    -ms-transition: 0.5s linear;
+    -o-transition: 0.5s linear;
+  }
+  .menu > li > a:hover {
+    background:#f1f3f7;
+    color: #4b00ff;
+  }
+  .menu > li > a > i {
+    padding-right: 10px;
+  }
+  .menu > li.trash > a:hover {
+    color: red;
+  }
+.menu hr{
+  width: 80%;
+}
+
+  ::selection {
+    color: blue;
+    background:lightgrey;
+  }
+
+/* otp */
+.otp-box{
+  width:50px;
+  height:50px;
+
+  padding: 0px;
+  border:1px solid black;
+  margin-right: 10px;
+  position: relative;
+}
+.otp-box > input{
+  margin-right: 10px;
+  border:none;
+  transform: scale(1.6);
+  position: absolute;
+  left: 15px;
+}
+.otp-box > input:focus{
+  outline: none;
+}

@@ -1,0 +1,49 @@
+
+.error-div{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .error-div img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+    border:none;
+  }
+  .error-div h2{
+    z-index: 1;
+    position: relative;
+    font-size: 90px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 32px;
+    line-height: 60px;
+  }
+  
+  .error-div h2 span{
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 10px;
+  }
+  
+  @media (max-width:800px){
+    .error-div h2{
+      font-size: 60px;
+      letter-spacing: 19px;
+      line-height: 35px;
+    }
+  
+    .error-div h2 span{
+      font-size: 26px;
+    }
+  }
+        

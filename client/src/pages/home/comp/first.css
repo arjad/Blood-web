@@ -1,0 +1,396 @@
+.first-div{
+    border:5px solid red !important ;
+    margin-top:50px;
+    background-color: white;
+    padding: 0px;
+  } 
+  
+  h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+  }
+  
+  
+  img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
+  }
+  
+  
+  .block.page-header {
+  height: auto;
+  min-height: 160px;
+  padding: 60px 0;
+  /* background: top 90px center repeat-x url("../themes/custom/jebsen/img/bg_wave.svg"); */
+  position: relative;
+  }
+
+  .draggable-views td:last-child {
+  text-align: right;
+  }
+  
+  .draggable-views .tabledrag-toggle-weight-wrapper {
+  display: none;
+  }
+  
+  .ajax-progress-fullscreen {
+  position: static;
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  border-radius: 0;
+  opacity: 1;
+  background: center center no-repeat url("../themes/custom/jebsen/img/spinner.svg");
+  background-size: contain;
+  animation: spin 4s linear infinite;
+  }
+  
+  @keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  }
+  
+  article.node--type-homepage {
+  overflow: visible;
+  }
+  
+  article.node--type-homepage .images .field__item {
+  position: absolute;
+  padding: 10px;
+  box-sizing: border-box;
+  }
+  
+  article.node--type-homepage .images .field__item:before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: center center no-repeat url("../themes/custom/jebsen/img/pages/front/diamond-blue.png");
+  background-size: contain;
+  }
+  
+  article.node--type-homepage .images img {
+  display: block;
+  width: 100%;
+  }
+  
+  article.node--type-homepage .field--name-field-hp-images-2x2 .field__item,
+  article.node--type-homepage .field--name-field-hp-images-2x2-2 .field__item {
+  width: 400px;
+  height: 400px;
+  }
+  
+  article.node--type-homepage .field--name-field-hp-images-2x1 .field__item {
+  width: 300px;
+  height: 300px;
+  }
+  
+  article.node--type-homepage .field--name-field-hp-images-2x1 .field__item:before {
+  background-image: url("../themes/custom/jebsen/img/pages/front/rect-blue.png");
+  }
+  
+  article.node--type-homepage .field--name-field-hp-images-1x1 .field__item,
+  article.node--type-homepage .field--name-field-hp-images-1x1-2 .field__item {
+  width: 200px;
+  height: 200px;
+  }
+  
+  article.node--type-homepage .welcome {
+  height: auto;
+  min-height: 700px;
+  margin: -40px 0 0;
+  /*background: top 350px center repeat-x url("../themes/custom/jebsen/img/bg_wave.svg");*/
+
+  }
+  
+  article.node--type-homepage .welcome .wrapper {
+  position: relative;
+  }
+  
+  article.node--type-homepage .welcome h2 {
+  font-size: 70px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 20px;
+  }
+  
+  article.node--type-homepage .welcome h4 {
+  font-size: 20px;
+  font-weight: 400;
+  }
+  
+  article.node--type-homepage .welcome .left {
+  position: relative;
+  padding: 140px 0;
+  }
+  
+  article.node--type-homepage .welcome .right {
+  position: absolute;
+  top: 0;
+  left: 60%;
+  }
+  
+  article.node--type-homepage .welcome .right:before {
+  content: "";
+  display: block;
+  width: 190px;
+  height: 190px;
+  margin: 5px;
+  background: bottom center no-repeat url("../themes/custom/jebsen/img/pages/front/deco-1.svg");
+  background-size: contain;
+  position: absolute;
+  top: 400px;
+  left: 380px;
+  z-index: 1;
+  }
+  
+  article.node--type-homepage .welcome .right:after {
+  content: "";
+  display: block;
+  width: 190px;
+  height: 190px;
+  margin: 5px;
+  background: bottom center no-repeat url("../themes/custom/jebsen/img/pages/front/deco-3.svg");
+  background-size: contain;
+  position: absolute;
+  top: 300px;
+  right: -100px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x2 .field__item:nth-child(1) {
+  top: 0;
+  left: 300px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x2 .field__item:nth-child(2) {
+  top: 300px;
+  left: 0;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x2 .field__item:nth-child(2):before {
+  background-image: url("../themes/custom/jebsen/img/pages/front/diamond-aqua.png");
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x1 .field__item:nth-child(1) {
+  top: 0;
+  left: 100px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x1 .field__item:nth-child(2) {
+  top: 200px;
+  left: 500px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x1 .field__item:nth-child(2):before {
+  background-image: url("../themes/custom/jebsen/img/pages/front/rect-aqua.png");
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1 .field__item:nth-child(1) {
+  top: 200px;
+  left: 0;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1 .field__item:nth-child(2) {
+  top: 0;
+  left: 0;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1 .field__item:nth-child(3) {
+  top: 200px;
+  left: 200px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1 .field__item:nth-child(4) {
+  top: 300px;
+  left: 300px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1 .field__item:nth-child(4):before {
+  background-image: url("../themes/custom/jebsen/img/pages/front/diamond-aqua.png");
+  }
+  
+  article.node--type-homepage .welcome .left-left {
+  position: absolute;
+  top: 220px;
+  left: 10%;
+  }
+  
+  article.node--type-homepage .welcome .left-left:after {
+  content: "";
+  display: block;
+  width: 190px;
+  height: 190px;
+  margin: 5px;
+  background: bottom center no-repeat url("../themes/custom/jebsen/img/pages/front/deco-2.svg");
+  background-size: contain;
+  position: absolute;
+  top: 260px;
+  left: -110px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-2x2-2 .field__item:nth-child(1) {
+  top: 0;
+  right: 100px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1-2 .field__item:nth-child(1) {
+  top: 300px;
+  right: 100px;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1-2 .field__item:nth-child(2) {
+  top: 200px;
+  right: 0;
+  }
+  
+  article.node--type-homepage .welcome .field--name-field-hp-images-1x1-2 .field__item:nth-child(2):before {
+  background-image: url("../themes/custom/jebsen/img/pages/front/diamond-aqua.png");
+  }
+  
+  article.node--type-homepage .about-us {
+  font-size: 18px;
+  line-height: 2;
+  margin: 120px 0;
+  background: top 160px center repeat-x url("../themes/custom/jebsen/img/bg_wave.svg");
+  }
+  
+  article.node--type-homepage .about-us .wrapper {
+  position: relative;
+  }
+  
+  article.node--type-homepage .about-us .field--name-body {
+  position: relative;
+  z-index: 1;
+  }
+  
+  article.node--type-homepage .about-us .field--name-body .field__item * {
+  max-width: 580px;
+  }
+  
+  article.node--type-homepage .about-us .field--name-body .field__item h2 {
+  max-width: none;
+  font-weight: 600;
+  }
+  
+  article.node--type-homepage .about-us .right {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  }
+  
+  article.node--type-homepage .about-us .right:before {
+  content: "";
+  display: block;
+  width: 190px;
+  height: 190px;
+  margin: 5px;
+  background: bottom center no-repeat url("../themes/custom/jebsen/img/pages/front/deco-1.svg");
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 440px;
+  z-index: 1;
+  }
+  
+  article.node--type-homepage .about-us .field--name-field-hp-images-about-us .field__item {
+  width: 640px;
+  height: 640px;
+  }
+  
+  article.node--type-homepage .about-us .field--name-field-hp-images-about-us .field__item:before {
+  margin-left: -50px;
+  }
+  
+  article.node--type-homepage .view-header header {
+  padding: 40px 0;
+  /* background: bottom center repeat-x url("./themes/custom/jebsen/img/bg_wave.svg"); */
+  }
+  
+  article.node--type-homepage .view-header header .wrapper {
+  position: relative;
+  }
+  
+  article.node--type-homepage .view-header header .wrapper:before {
+  content: "";
+  display: block;
+  width: 175px;
+  height: 75px;
+  /* background: center center no-repeat url("./themes/custom/jebsen/img/tri-banner.svg"); */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  }
+  
+  article.node--type-homepage .view-header header h2 {
+  margin: 0;
+  }
+  
+  article.node--type-homepage .our-life .views-row:nth-child(2) {
+  margin-top: -100px;
+  }
+  
+  article.node--type-homepage>.views-element-container {
+  margin: 80px 0;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x2 .field__item,
+  .path-frontpage .field--name-field-hp-images-2x1 .field__item,
+  .path-frontpage .field--name-field-hp-images-1x1 .field__item,
+  .path-frontpage .field--name-field-hp-images-2x2-2 .field__item,
+  .path-frontpage .field--name-field-hp-images-1x1-2 .field__item,
+  .path-frontpage .field--name-field-hp-images-about-us .field__item,
+  .path-frontpage .view .views-row {
+  opacity: 0;
+  }
+  
+  .path-frontpage .scrolled-in {
+  animation: go_up2 0.65s 0s ease-in-out 1 forwards, fade_in 0.65s 0s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x2 .field__item.scrolled-in:nth-child(1) {
+  animation: fade_in 0.65s 0s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x2 .field__item.scrolled-in:nth-child(2) {
+  animation: fade_in 0.65s 0.5s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x1 .field__item.scrolled-in:nth-child(1) {
+  animation: fade_in 0.65s 0.2s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x1 .field__item.scrolled-in:nth-child(2) {
+  animation: fade_in 0.65s 0.7s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-1x1 .field__item.scrolled-in:nth-child(1) {
+  animation: fade_in 0.65s 0.1s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-1x1 .field__item.scrolled-in:nth-child(2) {
+  animation: fade_in 0.65s 0.8s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-1x1 .field__item.scrolled-in:nth-child(3) {
+  animation: fade_in 0.65s 0.4s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-1x1 .field__item.scrolled-in:nth-child(4) {
+  animation: fade_in 0.65s 1s ease-in-out 1 forwards;
+  }
+  
+  .path-frontpage .field--name-field-hp-images-2x2-2 .field__item.scrolled-in:nth-child(1) {
+  animation: fade_in 0.65s 0.4s ease-in-out 1 forwards;
+  }
+  

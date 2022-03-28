@@ -1,0 +1,123 @@
+
+/* /// */
+.table-div .heading_donors{
+    position: relative;
+}
+.heading_donors h2{
+    font-size: 32px;
+}
+
+.heading_donors img{
+    position: absolute;
+    top:90%;
+    left:-20px;
+    width:280px;
+    height: 30px;
+}
+.table{
+    margin-top: 50px;
+    font-size: 15px;
+    z-index: 1;   
+}
+.table .donor_name{
+    padding: 5px;
+}
+
+
+/* Benifits */
+.steps_count {
+  color: #C1282D;
+  position: absolute;
+  left: 0px;
+  top: -15px;
+  z-index: -1;
+  font-size: 53px;
+  font-weight: 500;
+  opacity: 40%;
+  font-family: monospace;
+}
+.steps_count2 {
+  color: #C1282D;
+  position: absolute;
+  right: 0;
+  top: -15px;
+  z-index: -1;
+  font-size: 53px;
+  font-weight: 500;
+  opacity: 40%;
+  font-family: monospace;
+}
+.benifits-img{
+    padding: 15px;
+    border: 1px solid rgb(168, 167, 167);
+    border-radius: 100%;
+    height: 450px;
+    width: 450px;
+    transition-duration: 1s;
+}
+
+.benifits-img > div {
+  height: 450px;
+  width: 100%;
+    padding: 15px;
+    border: 1px solid rgb(209, 209, 209);
+    overflow: hidden;
+    border-radius: 100%;
+  background-image: url("../../assets/benefits.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+    
+    background-color: red;
+    
+}
+
+.benifit-r{
+  display:flex;
+  align-items: right;
+  flex-direction: column;
+}
+.benifit-r > h4{
+  margin-left: auto;
+}
+.benifit-r > p{
+  text-align: right;
+}
+.benifit-r > h4 > span{
+  right: 0 !important;
+}
+.blob {
+	background: transparent;
+	border-radius: 50%;
+	margin: 10px;
+  height:100%;
+  width: 100%;
+	transform: scale(1);
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+	70% {
+		box-shadow: 0 0 0 30px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+
+
+.team-div div{
+    height:100%;
+    width:100%;
+  
+  }
+  .team-div div img{
+    height:100%;
+    width:100%;
+  
+  }
+  

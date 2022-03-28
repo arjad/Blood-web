@@ -1,0 +1,25 @@
+.Speakbtn{
+    background-color: tomato;
+    border: 1px solid tomato;
+    margin-left: 40%;
+    color: white;
+    padding: 10px;
+    border-radius: 0px 15px;
+    margin-right: 2%;
+}
+.Speakbtn:hover{
+    background-color: white;
+    color :black;
+}
+.Urdubtn{
+    background-color: tomato;
+    border: 1px solid tomato;
+    
+    color: white;
+    padding: 10px;
+    border-radius: 0px 15px;   
+}
+.Urdubtn:hover{
+    background-color: white;
+    color :black;
+}
