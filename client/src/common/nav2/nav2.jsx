@@ -7,7 +7,16 @@ import Logo from "../../assets/logo.PNG";
 
 const Nav2 = () => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
-  return (
+  
+  let arjad= () =>{
+    let modal = document.querySelector(".hamburger-menu");
+    if (modal) 
+    {
+      modal.classList.toggle("bgc");
+    }
+  }
+  
+return (
     <>
       <nav className="main-nav shadow">
         {/* 1st logo part  */}
@@ -56,7 +65,11 @@ const Nav2 = () => {
         <div className="social-media">
           {/* hamburget menu start  */}
           <div className="hamburger-menu">
-            <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+            <a href="#" onClick={() =>
+              { 
+                arjad();
+                setShowMediaIcons(!showMediaIcons)
+              }}>
               <GiHamburgerMenu />
             </a>
           </div>

@@ -124,7 +124,7 @@ function Loginform() {
     }
     else {
       console.log("login POST- valid reg ");
-      // history.push("/profile");
+      history.push("/profile");
     }
   }
 

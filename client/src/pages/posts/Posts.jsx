@@ -13,7 +13,6 @@ function Posts()
 
   // const history = useHistory();
   const [product, setProduct] = useState({
-    // productname:"", productprice:"",productcat:"", bestoffer:"",productimg:""
     patient_blood:"",patient_name:"",patient_age:"",when_needed:"",mobile_no:"",mobile_no2:"",blood_units_needed:"",patient_address:"",hospital_name:"",purpose:""
 
   })

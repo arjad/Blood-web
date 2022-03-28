@@ -19,7 +19,16 @@ const usermodel = new mongoose.Schema({
     },
     phoneno:{
         type:String,
-    }    
+    },
+    city:{
+        type:String,
+    },
+    country:{
+        type:String,
+    },
+    area:{
+        type:String,
+    }
 })
 //now create collection
 const user = new mongoose.model("user-col", usermodel);

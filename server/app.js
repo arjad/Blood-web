@@ -15,8 +15,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 
 //connection to mongo db
-// const DB= "mongodb+srv://arjad:123@cluster0.lbunz.mongodb.net/freshfood-db?retryWrites=true&w=majority";
-// const DB = "mongodb+srv://arjad:123@cluster0.cl5kh.mongodb.net/fyp-db?retryWrites=true&w=majority";
 const DB = "mongodb://arjad:123@cluster0-shard-00-00.cl5kh.mongodb.net:27017,cluster0-shard-00-01.cl5kh.mongodb.net:27017,cluster0-shard-00-02.cl5kh.mongodb.net:27017/fyp-db?ssl=true&replicaSet=atlas-peik6a-shard-0&authSource=admin&retryWrites=true&w=majority";
 mongoose.connect(process.env.MONGODB_URI || DB, {
     useNewUrlParser:true,
@@ -98,16 +96,18 @@ app.post("/users/logininsert",async (req,res)=>{
         console.log("user login = "+userlogin);
         if(login_pass !== userlogin.pass)
         {
-            console.log("pass not matched");
+            console.log("Invalid login Credientials");
             res.status(400).json({error:"Invalid Credientials"})
         }
         else{
             res.json({message:"sign in successfully done"})
-            console.log("login success");    
+            console.log("login success"); 
+               
             
         }
     }
     else{
+        console.log("Invalid login Credientials");
         res.status(400).json({error:"Invalid Credientials"})
     }
 })
