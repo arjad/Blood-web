@@ -1,9 +1,7 @@
 # FYP-Blood
-final year
+final year  
 # Blood-Website
-our latest fyp group
-https://brave-hopper-9c59db.netlify.app/
-
+https://magnificent-taffy-aec4cf.netlify.app/
 it is blood donor website to help peoples to find blood
 
 <h2>modules used in front end</h2>
