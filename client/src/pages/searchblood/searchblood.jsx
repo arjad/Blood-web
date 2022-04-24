@@ -1,13 +1,31 @@
-import {React,useState} from 'react'
+import {React,useEffect,useState} from 'react'
 import Footer from "../../common/footer/footer";
 import Underline from "../../assets/underline.png";
 import "./searchblood.css";
-import Avatar from "../../assets/avatar.png";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import ReactTooltip from "react-tooltip";
+
 
 export default function Searchblood() 
 {
-  const [search, setsearch] = useState("")
   const [load, setload] = useState();
+  const [search, setsearch] = useState("")
+  const [copy,setcopy] = useState(false)
+  const [copytext,setcopytext] =useState("Click To Copy")
+
+  let sr_no = 0;
+  useEffect(()=>{
+    if(copy)
+    {
+      setcopytext("Copied")
+      setTimeout(()=>{ setcopytext("Click To Copy")}, 3000);
+      setcopy(false)
+    }
+  },[copy])
+
+  useEffect(()=>{
+    getusers()
+  },[])
 
   const [allusers , setallusers] = useState([]); 
   //////////
@@ -32,7 +50,6 @@ export default function Searchblood()
       setload(false)
       console.log("READ-   All Users = ", data);
       setallusers([...data])
-
     })
     .catch((error) => console.error("FETCH ERROR:", error));
   }
@@ -44,65 +61,125 @@ export default function Searchblood()
                 <div className="earth"></div>
             </div>
 
-            <div className='container '>
+            <div className='container'>
               <div className='search_bars bg-white'>
                 <div className="heading_donors">
                   <h2>Find Donors</h2>
                   <img src={Underline}/>
                 </div>
-                <div class="input-group mt-5">
-                  <input onChange={(e)=>setsearch(e.target.value)} className="form-control" type="text" class="form-control" placeholder="Search by Patient's name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                  <div class="input-group-append">
-                    <button onClick={getusers} class="btn filter-btn" type="button">Refresh</button>
-                  </div>
+                <div class="mt-4">
+                    <select onChange={(e)=>setsearch(e.target.value)} name="bg" id="bg">
+                      <option value="" disabled selected>Select Blood Group</option>
+                      <option value="all">All</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                    </select>
+
+                    <select name="Location" id="Location" required>
+                      <option value="" disabled selected>Select The City</option>
+                      <option value="all">All</option>
+                      <option value="Islamabad">Islamabad</option>
+                      <option value="Lahore">Lahore</option>
+                      <option value="Karachi">Karachi</option>
+                      <option value="Bahawalpur">Bahawalpur</option>
+                      <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+                      <option value="Faisalabad">Faisalabad</option>
+                      <option value="Gujranwala">Gujranwala</option>
+                      <option value="Gujrat">Gujrat</option>
+                      <option value="Jhelum">Jhelum</option>
+                      <option value="Kasur">Kasur</option>
+                      <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+                      <option value="Sargodha">Sargodha</option>
+                      <option value="Sheikhupura">Sheikhupura</option>
+                      <option value="Sialkot">Sialkot</option>
+                      <option value="other">Other</option>
+                    </select>
+
+                    <select name="bg" id="bg">
+                      <option value="" disabled selected>You are from PUCIT</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+
+                    <button onClick={getusers} className="btn filter-btn" type="button">Filter</button>
                 </div>
               </div>
+
             <div className="searchblood-div">
-              
-              {/* card here */}
-              {allusers.filter((val)=>{
-                console.log("all users = ", allusers);
-                if(search == "")
+              <button onClick={getusers} class="btn-green btn mt-3" >
+	        	  	<img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/> <p>Reload</p>
+	            </button>
+	         
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope='col'>Blood Group</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone No</th>
+                  <th scope="col">City</th>
+                </tr>
+              </thead>
+              <tbody>
+              {/* table row here */}
+              {load ?<div id="loader-wrapper">
+                      <div id="loader"></div>
+                      <div class="loader-section section-left"></div>
+                      <div class="loader-section section-right"></div>
+                    </div> :allusers.filter((val)=>{
+                      console.log(val);
+                if(search == "all")
                 {
-                  //return every item in array
                   return val;
                 }
-                else if(val.fname.toLowerCase().includes(search.toLowerCase()))
+                else if(val.blood.includes(search.toString()))
                 {
                   return val;
                 }
-                else if(val.lname.toLowerCase().includes(search.toLowerCase()))
-                {
-                  return val;
-                }
-                else if(val.city.toLowerCase().includes(search.toLowerCase()))
-                {
-                  return val;
-                }
-                else if(val.country.toLowerCase().includes(search.toLowerCase()))
-                {
-                  return val;
-                }
+                // else if(val.city.includes(search.toString()))
+                // {
+                //   return val;
+                // }
+                // else if(val.pucit.includes(search.toString()))
+                // {
+                //   return val;
+                // }
               }).map((val,key)=>{ 
             return(
-              <div class="card m-4 bg-light text-white">
-                <div class="imgBx">
-                    <img src={Avatar} alt="no img"/>
-                  </div>
-                  <div class="contentBx">
-                    <h2>{val.fname} {val.lname}</h2>
-                    <div class="color">
-                      <h3>{val.address}</h3>
-                      <h3>Mobile1 :{val.phoneno}</h3>
-                      <h3>Mobile2:{val.phoneno2}</h3>
-                      <h3>Country:{val.country}</h3>
-                    </div>
-
-                    <a href="#">View Profile</a>
-                  </div>
-                </div>
+                  
+              <tr>
+                <th scope="row">{sr_no + 1}</th>
+                <td>{val.fname} {val.lname}</td>
+                <td>{val.blood}</td>
+                <CopyToClipboard text={val.email}
+                  onCopy={() => setcopy(true)}>
+                  <td data-tip data-for="copying" className='email-copy'>{val.email}
+                    <ReactTooltip id="copying" className='bg-dark' place="bottom" effect="float">
+                      {copytext}
+                    </ReactTooltip>
+                  </td>
+                </CopyToClipboard>
+    
+                <td data-tip data-for="calling" >
+                  <a href={`tel:${val.phoneno}`}>
+                    {val.phoneno}
+                  </a>
+                  <ReactTooltip id="calling" className='bg-dark' place="bottom" effect="float">
+                      Click To Call
+                  </ReactTooltip>
+                </td>
+              </tr>
               )})}     
-
+              
+              </tbody>
+            </table>
             </div>
             </div>
         

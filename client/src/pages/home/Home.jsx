@@ -1,5 +1,4 @@
 import React from 'react'
-import RightClick from '../special-effects/RightClick';
 import Chat from "../special-effects/chat";
 import Main from "../home/comp/mains";
 import Table from "../home/comp/table";
@@ -11,7 +10,6 @@ import Footer from "../../common/footer/footer"
 export default function Home() 
 {
     return (<>
-        <RightClick/>
         <Chat/>    
         <Main/>
         <Table/>

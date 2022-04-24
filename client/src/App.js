@@ -47,6 +47,10 @@ function App()
                     <Route path="/privacypolicy" exact component={Privacy}/>
                     <Route path="/posts" exact component={Post}/>
                     <Route path="/profile" exact component={Profile} />
+                    <Route path="/dashboard/:uid">
+                        <Profile/>
+                    </Route>
+
                     <Route><ErrorPage/></Route>
 
                 </Switch>

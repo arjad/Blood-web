@@ -9,7 +9,7 @@ export default function Table()
                 <h2>Our Top Donors</h2>
                 <img src={Underline}/>
             </div>
-            <table className="table">
+            <table className="table tables">
                 <thead className="thead-dark">
                   <tr>
                     <th scope="col" className='sr-col'>Sr #</th>

@@ -55,7 +55,7 @@ label {
     text-align: right;
     margin-bottom: 10px;
 }
-.field input,select {
+.post-div .field input[type=text],.post-div input[type=number],.post-div input[type=email],.post-div select {
     font-size: 16px;
     line-height: 28px;
     padding: 8px 16px;
@@ -65,18 +65,97 @@ label {
     border: unset;
     border-radius: 4px;
     outline-color:  #C1282D;
-    background-color: rgb(252, 248, 248);
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+/* post filter */
+
+.post_search{
+	width: 80%;
+	margin-left:20%;
+}
+.post_search select{
+  width: 250px;
+  margin: 7px;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 8px 16px;
+  min-height: 44px;
+  border:1px solid rgb(184, 182, 182) !important;
+  border: unset;
+  border-radius: 4px;
+  outline-color:  #C1282D;
 }
 
 
-.field-checkbox input {
+/* radio btn */
+.r1 {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.r1 input {
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: rgb(185, 177, 177);
+  border-radius: 50%;
+}
+
+.r1:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.r1 input:checked ~ .checkmark {
+  background-color: #C1282D;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.r1 input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.r1 .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+/* ////// */
+.roll-input{
+  position: absolute;
+  right: 0px;
+  top: 15px;
+  width: 60% !important;
+  opacity: 0;
+}
+.roll-input-show{
+  opacity: 1 !important;
+}
+
+.field-checkbox input[type=text] {
     width: 20px;
     height: 15px;
     margin-right: 5px; 
@@ -151,10 +230,7 @@ label {
   background-color: white;
   border:1px solid #C1282D;
 	cursor: pointer;
-
-  
 }
-
 .icon {
   position: absolute;
   left: 14px;
@@ -444,3 +520,9 @@ body:active * {
 }
 
 
+.cards{
+  height: 400px;
+  width: 300px;
+  border: 2px solid black !important;
+  color:black;
+}

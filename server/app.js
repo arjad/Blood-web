@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(cors())
+const ObjectId = require('mongodb').ObjectId; 
+
 //to host our website we keep port number in env filess
 const port  = process.env.PORT || 5000;
 const path = require("path");
 const mongoose = require("mongoose");
-const { emitWarning } = require("process");
+const { emitWarning, nextTick } = require("process");
 
 //model imort 
 const PostModal = require("./models/postmodel");
@@ -50,7 +52,37 @@ app.get("/users/read",async (req,res)=>{
 
     const u = await UserModal.find();
     res.send(u);
-    console.log("================ Users are Shown ========== ");
+    console.log("=== All Users are Shown === ");
+})
+
+////////
+// read single users
+app.get("/users/read/:uid",async (req,res)=>{
+
+    var id = req.params.id;       
+    var good_id = new ObjectId("622f35670be6aaf768594481");
+
+    //you can now query
+    const a = await UserModal.find({_id: ObjectId('622f35670be6aaf768594481')})
+    .then((userfound)=>{
+        if(userfound)
+        {
+            console.log("=== Single User === " + userfound);
+            return res.status(200).json(userfound);
+            // res.status(201).json({message:userfound})
+
+        }
+        else if(userfound === NULL && !userfound)
+        {
+            console.log("user not found");
+            return res.sendStatus(404).end();       
+        }
+    })
+    .catch((e)=>{
+        next(e);
+        console.log("error = " + e)
+    });
+    console.log("a =" + a );
 })
 
 //get data from front end  & post to db
@@ -97,18 +129,16 @@ app.post("/users/logininsert",async (req,res)=>{
         if(login_pass !== userlogin.pass)
         {
             console.log("Invalid login Credientials");
-            res.status(400).json({error:"Invalid Credientials"})
+            res.status(400).json({message:"Invalid Credientials"})
         }
         else{
             res.json({message:"sign in successfully done"})
             console.log("login success"); 
-               
-            
         }
     }
     else{
         console.log("Invalid login Credientials");
-        res.status(400).json({error:"Invalid Credientials"})
+        res.status(400).json({message:"Invalid Credientials"})
     }
 })
 
@@ -129,15 +159,22 @@ app.get("/posts/read",async (req,res)=>{
 app.post("/posts/insert",async (req,res)=>{
     console.log("Post added, req= ", req.body)    
 
-    const {patient_blood,patient_name,patient_age,when_needed,mobile_no,mobile_no2,blood_units_needed,patient_address,hospital_name,purpose} = req.body;
+    const {patient_blood,patient_name,pucit_roll,mobile_no,email,patient_address,patient_city,hospital_name} = req.body;
 
-    if(!patient_blood || !patient_name || !patient_age || !when_needed || !mobile_no|| !mobile_no2|| !blood_units_needed|| !patient_address || !hospital_name || !purpose)
+    if(!patient_blood || !patient_name || !mobile_no || !email || !patient_address || !email || !patient_address) 
     {
-        console.log("Any Input value missing , so data cannot sent to DB");
+        console.log("name and blood present Any Input value missing , so data cannot sent to DB");
         return res.status(200).json({error :" plz fill all field properly"});
     }
+    if( !hospital_name )
+    {
+        console.log("other missing");
+        return res.status(200).json({error :" plz fill all field properly"});
+    
+    }
     try{
-        const post = new PostModal({patient_blood,patient_name,patient_age,when_needed,mobile_no,mobile_no2,blood_units_needed,patient_address,hospital_name,purpose});
+
+        const post = new PostModal({patient_blood,patient_name,pucit_roll,mobile_no,email,patient_address,patient_city,hospital_name});
         
         const data_entered = post.save();
         if(data_entered)

@@ -53,6 +53,8 @@
     "react-spring": "^9.2.4",
     "react-tsparticles": "^1.37.5",
     "react-webcam": "^5.2.4",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.8",
     "typewriter-effect": "^2.18.2",
     "web-vitals": "^1.1.2"
   },

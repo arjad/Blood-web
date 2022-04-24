@@ -1,25 +1,31 @@
 .Speakbtn{
-    background-color: tomato;
-    border: 1px solid tomato;
+    background-color:  #C1282D;
+    border: 1px solid  #C1282D;
     margin-left: 40%;
     color: white;
     padding: 10px;
     border-radius: 0px 15px;
     margin-right: 2%;
+    transition-duration: .5s;
+
 }
 .Speakbtn:hover{
     background-color: white;
-    color :black;
+    border: 1px solid  #C1282D;
+    color :#C1282D;
 }
 .Urdubtn{
-    background-color: tomato;
-    border: 1px solid tomato;
+    background-color: #C1282D;
+    border: 1px solid  #C1282D;
     
     color: white;
     padding: 10px;
     border-radius: 0px 15px;   
+    transition-duration: .5s;
 }
 .Urdubtn:hover{
     background-color: white;
-    color :black;
+    border: 1px solid  #C1282D;
+    
+    color :#C1282D;
 }

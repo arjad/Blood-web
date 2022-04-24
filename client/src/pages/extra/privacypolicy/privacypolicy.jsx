@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react'
 import { useSpeechSynthesis } from 'react-speech-kit';
 import "./privacypolicy.css";
+import Footer from "../../../common/footer/footer";
 
 export default function Privacypolicy() 
 {
@@ -65,5 +66,6 @@ export default function Privacypolicy()
         <button className="m-3 Urdubtn" onClick={() => setValue(Urdutext)}>Convert To Urdu</button>
         </div>
         
+        <Footer/>
     </div>)
 }

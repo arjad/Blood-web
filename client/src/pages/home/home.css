@@ -14,7 +14,7 @@
     width:280px;
     height: 30px;
 }
-.table{
+.tables{
     margin-top: 50px;
     font-size: 15px;
     z-index: 1;   
@@ -120,4 +120,11 @@
     width:100%;
   
   }
-  
+  .sliders .d1{
+    height: 100%;
+    width: 100%;
+  }
+  .sliders .d1 img{
+    height: 100%;
+    width: 100%;
+  }

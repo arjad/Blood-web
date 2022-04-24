@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Footer from "../../../../common/footer/footer";
 import { Formik, Form, Field } from 'formik';
-
+import Swal from 'sweetalert2';
 import * as Yup from "yup";
 
-function Loginform() {
+function Loginform() 
+{
   let history = useHistory();
   const [auths, setauths] = useState(false);
   const signUpButton = document.querySelector('.signUp');
@@ -14,9 +15,8 @@ function Loginform() {
 
   //yup schema
   const LoginSchema = Yup.object().shape({
-    login_email: Yup.string().email('Invalid email').required('Email Required'),
-    login_pass: Yup.string().required('Pass Required'),
-    
+    login_email: Yup.string().email('* Invalid email').required('* Email is required'),
+    login_pass: Yup.string().required('* Password is required'),
   });
 
   //post user info
@@ -28,8 +28,10 @@ function Loginform() {
   //use signle state hooks to handle all input values
   let att_name, att_value;
   const handleinput = (e) => {
+
     att_name = e.target.name;
     att_value = e.target.value;
+
     setuser({ ...user, [att_name]: att_value })
     console.log("user state = ", user);
   }
@@ -72,21 +74,51 @@ function Loginform() {
     //object destructring
     const { fname, lname, blood, phoneno, email, pass } = user;
 
-    //post to server address
-    const res = await fetch("http://localhost:5000/users/insert", {
-      method: "POST",
-      mode: 'cors',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ fname, lname, blood, phoneno, email, pass })
-    })
-    const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert("POST- invalid reg");
+    console.log(fname,lname);
+    if(fname && lname && blood && phoneno && email && pass)
+    {
+      //post to server address
+      const res = await fetch("http://localhost:5000/users/insert", {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fname, lname, blood, phoneno, email, pass })
+      })
+      const data = await res.json();
+      if (data.status === 422 || !data) {
+        // window.alert("POST- invalid reg");
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Sign Up Failed',
+          text: "Error in sending data to server",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+      else {
+        console.log("sign up- valid reg ");
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Sign Up Success',
+          text: "You are now registered member",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
     }
-    else {
-      console.log("sign up- valid reg ");
+    else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Sign Up Failed',
+        text: "Please fill all fields",
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   }
 
@@ -95,16 +127,6 @@ function Loginform() {
   /////////
   /// login post data 
   const LoginUser = async (e) => {
-    // e.preventDefault();
-
-    if (e.login_email == 'admin@gmail.com' && e.login_pass == 'admin') {
-      // setauths(true);
-      console.log("admin here , auths = ", auths);
-    }
-    else {
-      console.log("not admin");
-    }
-
     //object destructring
     const { login_email, login_pass } = e;
 
@@ -118,12 +140,28 @@ function Loginform() {
       body: JSON.stringify({ login_email, login_pass })
     })
     const data = await res.json();
-    if (data.status === 400 || data.status === 422 || !data) {
-      window.alert("POST- invalid reg");
+    // res.json has message in json formate
+    if ( data.message=="Invalid Credientials" || !data) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'LoginIn Failed',
+        text: 'Invalid Credientials',
+        showConfirmButton: false,
+        timer: 1500
+      })
 
     }
-    else {
+    else if (data.message=="sign in successfully done") {
       console.log("login POST- valid reg ");
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Login In Successfull',
+        text: 'Welcome Back Again',
+        showConfirmButton: false,
+        timer: 1500
+      })
       history.push("/profile");
     }
   }
@@ -149,19 +187,33 @@ function Loginform() {
         <div class="form-container sign-up-container border">
           {/* sign up */}
           <form method='POST' className='signup-form' action="#">
-            <h1>Sign Up</h1>
-            <input type="text" placeholder="First Name" name='fname' onChange={handleinput} />
-            <input type="text" placeholder="Last Name" name='lname' onChange={handleinput} />
-            <input type="text" placeholder="Blood Group" name='blood' onChange={handleinput} />
-            <input type="number" placeholder="Phone Number" name='phoneno' onChange={handleinput} />
-            <input type="email" placeholder="Email" name='email' onChange={handleinput} />
-            <input type="password" placeholder="Password" name='pass' onChange={handleinput} />
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="First Name" name='fname' onChange={handleinput} required/>
+            <input type="text" placeholder="Last Name" name='lname' onChange={handleinput} required/>
+              <select onChange={handleinput} name="blood" id="bg">
+                      <option value="" disabled selected>Select Blood Group</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+              </select>
+            
+            <input type="number" placeholder="Phone Number" name='phoneno' onChange={handleinput} required/>
+            <input type="email" placeholder="Email" name='email' onChange={handleinput} required/>
+            <input type="password" placeholder="Password" name='pass' onChange={handleinput} required/>
             <button className='signin-btn btn' name='submit' type='submit' onClick={PostUser}>Sign In</button>
           </form>
         </div>
 
         {/* login */}
         <div class="form-container sign-in-container">
+          <br/>
+          <br/>
+          <br/>
           <Formik
             initialValues={{
               login_email: '',
@@ -175,26 +227,16 @@ function Loginform() {
           >
             {({ errors, touched }) => (
               <div>
-                <Form>
-                  {/* <Field name="email" type="email" /> */}
-                  {/* {errors.email && touched.email ? <div>{errors.email}</div> : null} */}
-                  {/* <button type="submit">Submit</button> */}
-                </Form>
                 <Form className='signin-form' action="#">
                   <h1>Sign in</h1>
                   <br />
-                  <Field name="login_email" placeholder="Your Email" type="email" />
-                  {errors.login_email && touched.login_email ? <div>{errors.login_email}</div> : null}
-                  <Field name="login_pass" placeholder="Password" type="pass" />
-                  {errors.login_pass && touched.login_pass ? <div>{errors.login_pass}</div> : null}
+                  <Field name="login_email" className="signin-form-input" placeholder="Your Email" type="email" />
+                  {errors.login_email && touched.login_email ? <p>{errors.login_email}</p> : null}
+                  <Field name="login_pass" className="signin-form-input" placeholder="Password" type="pass" />
+                  {errors.login_pass && touched.login_pass ? <p>{errors.login_pass}</p> : null}
                   
-                  {/* <input type="email" placeholder="Email" onChange={(e) => { setlogin_email(e.target.value) }} /> */}
-                  {/* <input type="password" placeholder="Password" onChange={(e) => { setlogin_pass(e.target.value) }} /> */}
-
                   <br/>
-                  <button className='signin-btn btn' type="submit"
-                    // onClick={LoginUser}
-                  >Sign In</button>
+                  <button className='signin-btn btn' type="submit">Sign In</button>
                 </Form>
               </div>
 
@@ -218,7 +260,7 @@ function Loginform() {
           </div>
         </div>
       </div>
-
+              <br/>
       <Footer />
     </div>
   )

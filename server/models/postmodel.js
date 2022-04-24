@@ -8,30 +8,24 @@ const proSchema = new mongoose.Schema({
     patient_name:{
         type:String
     },
-    patient_age:{
-        type:String
-    },
-    when_needed:{
+    pucit_roll:{
         type:String
     },
     mobile_no:{
         type:String
     },
-    mobile_no2:{
-        type:String
-    },
-    blood_units_needed:{
+    email:{
         type:String
     },
     patient_address:{
         type:String
     },
+    patient_city:{
+        type:String
+    },
     hospital_name:{
         type:String
     },
-    purpose:{
-        type:String
-    }    
 })
 
 //now create collection
