@@ -521,8 +521,31 @@ body:active * {
 
 
 .cards{
-  height: 400px;
+  height: 420px;
   width: 300px;
-  border: 2px solid black !important;
+  border: 2px solid lightgrey !important;
   color:black;
+  border-radius: 10px;
+  transition-duration: 0.5s;
+}
+.cards:hover{
+  cursor: pointer;
+  transform: scale(10px,10px);
+  box-shadow: 0 4px 8px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.cards h2{
+  text-align: center;
+  text-transform:capitalize;
+}
+.cards p{
+  width: 100%;
+  position: relative;
+}
+.cards p span{
+  height: 100%;
+  width: 55%;
+  border-bottom: 1px solid black;
+  position: absolute;
+  right: 0px;
 }

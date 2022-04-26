@@ -14,8 +14,14 @@ function Posts()
     AOS.init({duration:3000});
     gettdataback();
   },[])
-  const [search, setsearch] = useState("")
-  
+  const [search, setsearch] = useState("all")
+  const [filtercity,setfiltercity] = useState("");
+  const [filterpucit, setfilterpucit] = useState("");  
+
+  useEffect(()=>{
+    console.log("search ");
+    console.log(search,filtercity,filterpucit);
+  },[search,filtercity,filterpucit])
 
   const[pucitcheck,setpucitcheck] =useState("no")
   const handlepucitcheck = (event) => {
@@ -327,7 +333,7 @@ function Posts()
                       <option value="AB-">AB-</option>
                     </select>
 
-                    <select name="Location" id="Location" required>
+                    <select onChange={(e)=>setfiltercity(e.target.value)} name="Location" id="Location" required>
                       <option value="" disabled selected>Select The City</option>
                       <option value="all">All</option>
                       <option value="Islamabad">Islamabad</option>
@@ -347,10 +353,10 @@ function Posts()
                       <option value="other">Other</option>
                     </select>
 
-                    <select name="bg" id="bg">
+                    <select onChange={(e)=>setfilterpucit(e.target.value)} name="bg" id="bg">
                       <option value="" disabled selected>You are from PUCIT</option>
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
                     </select>
 
                     <button onClick={gettdataback} className="btn filter-btn" type="button">Filter</button>
@@ -373,14 +379,17 @@ function Posts()
                         <div class="loader-section section-right"></div>
                     </div> : allposts.filter((val)=>{
                       console.log("saearch = " + search);
-                if(search == "all")
+                if(val.patient_blood == search.toString() || search == "all")
                 {
+                  console.log("bg filter");
+
                   return val;
                 }
-                // else if(val.city.includes(search.toString()))
-                // {
-                //   return val;
-                // }
+                if(val.patient_city == filtercity.toString() || filtercity =="all")
+                {
+                  console.log("city filter");
+                  return val;
+                }
                 // else if(val.pucit.includes(search.toString()))
                 // {
                 //   return val;
@@ -388,15 +397,16 @@ function Posts()
               }).map((val,index)=>{
                     
                 return(
-                  <div class="cards m-3 p-2">
-                    <h2>{val.patient_name}</h2>
-                    <p>Blood Group{val.patient_blood}</p>
-                    <p>Mobile1 :{val.mobile_no}</p>
-                    <p>Email:{val.email}</p>
-                    <p>Blood Group: {val.patient_blood}</p>
-                    <p>Address:{val.patient_address}</p>
-                    <p>Recipient City: {val.patient_city}</p>
-                    <p>Hospital Name:{val.hospital_name}</p>
+                  <div class="cards m-3 p-3">
+                    <h2 className='text-center'>{val.patient_name}</h2><br/>
+                    <p>PUCIT Roll:<span>{val.pucit_roll}</span></p>
+                    <p>Blood Group<span>{val.patient_blood}</span></p>
+                    <p>Mobile1 :<span>{val.mobile_no}</span></p>
+                    <p>Email:<span>{val.email}</span></p>
+                    <p>Blood Group:<span>{val.patient_blood}</span></p>
+                    <p>Address:<span>{val.patient_address}</span></p>
+                    <p>Recipient City:<span> {val.patient_city}</span></p>
+                    <p>Hospital Name:<span>{val.hospital_name}</span></p>
                 </div>
               )
                 })
