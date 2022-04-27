@@ -15,34 +15,25 @@ function Posts()
     gettdataback();
   },[])
   const [search, setsearch] = useState("all")
-  const [filtercity,setfiltercity] = useState("");
-  const [filterpucit, setfilterpucit] = useState("");  
+  const [filtercity,setfiltercity] = useState("all");
+  const[pucitcheck,setpucitcheck] =useState("yes");
 
-  useEffect(()=>{
-    console.log("search ");
-    console.log(search,filtercity,filterpucit);
-  },[search,filtercity,filterpucit])
-
-  const[pucitcheck,setpucitcheck] =useState("no")
   const handlepucitcheck = (event) => {
     setpucitcheck(event.target.value)
     if(pucitcheck === "yes")
     {
       // console.log(pucitcheck)
       document.getElementsByClassName("roll-input")[0].classList.remove("roll-input-show")
-
     }
     else{
       // console.log(pucitcheck);
       document.getElementsByClassName("roll-input")[0].classList.add("roll-input-show")
-
     }
   }
 
   // const history = useHistory();
   const [product, setProduct] = useState({
     patient_blood:"",patient_name:"",pucit_roll:"",mobile_no:"",email:"",patient_address:"",patient_city:"",hospital_name:"",
-
   })
 
   const [allposts , setallposts] = useState([]); 
@@ -52,8 +43,6 @@ function Posts()
   const[updated_food_name, setupdated_food_name] = useState('');
   const[updated_food_price,setupdated_food_price] = useState('');
 
-  // console.log("loading = " , load);
-
   //use signle state hooks to handle all input values
   let att_name, att_value;
   const handleinput = (e) =>{
@@ -62,7 +51,6 @@ function Posts()
     setProduct({...product, [att_name]:att_value })
     console.log("post state = " , product);
   }
-
 
   //////////
   ///show data 
@@ -353,13 +341,13 @@ function Posts()
                       <option value="other">Other</option>
                     </select>
 
-                    <select onChange={(e)=>setfilterpucit(e.target.value)} name="bg" id="bg">
+                    <select onChange={(e)=>setpucitcheck(e.target.value)} name="bg" id="bg">
                       <option value="" disabled selected>You are from PUCIT</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
 
-                    <button onClick={gettdataback} className="btn filter-btn" type="button">Filter</button>
+                    {/* <button onClick={gettdataback} className="btn filter-btn" type="button">Filter</button> */}
                 </div>
               </div>
 
@@ -378,24 +366,27 @@ function Posts()
                         <div class="loader-section section-left"></div>
                         <div class="loader-section section-right"></div>
                     </div> : allposts.filter((val)=>{
-                      console.log("saearch = " + search);
                 if(val.patient_blood == search.toString() || search == "all")
                 {
-                  console.log("bg filter");
-
+                  // console.log("bg filter");
                   return val;
                 }
+                
+                }).filter((val)=>{
                 if(val.patient_city == filtercity.toString() || filtercity =="all")
                 {
-                  console.log("city filter");
+                  // console.log("city filter");
                   return val;
                 }
-                // else if(val.pucit.includes(search.toString()))
-                // {
-                //   return val;
-                // }
+              }).filter((val)=>{
+                if(pucitcheck==="yes")
+                {
+                  // console.log("pucit check");
+                  console.log(val);
+                  return val;
+                }
+
               }).map((val,index)=>{
-                    
                 return(
                   <div class="cards m-3 p-3">
                     <h2 className='text-center'>{val.patient_name}</h2><br/>

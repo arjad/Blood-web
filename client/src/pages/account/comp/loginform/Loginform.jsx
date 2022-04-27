@@ -41,9 +41,6 @@ function Loginform()
   const [login_pass, setlogin_pass] = useState('');
   const [allusers, setallusers] = useState([]);
 
-
-
-
   //////////
   ///show all users (only to admin)
   const getuserback = async (e) => {
@@ -121,7 +118,6 @@ function Loginform()
       })
     }
   }
-
 
 
   /////////
@@ -202,7 +198,6 @@ function Loginform()
                       <option value="AB-">AB-</option>
               </select>
             
-            <input type="number" placeholder="Phone Number" name='phoneno' onChange={handleinput} required/>
             <input type="email" placeholder="Email" name='email' onChange={handleinput} required/>
             <input type="password" placeholder="Password" name='pass' onChange={handleinput} required/>
             <button className='signin-btn btn' name='submit' type='submit' onClick={PostUser}>Sign In</button>

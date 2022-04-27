@@ -9,7 +9,10 @@ import ReactTooltip from "react-tooltip";
 export default function Searchblood() 
 {
   const [load, setload] = useState();
-  const [search, setsearch] = useState("")
+  const [search, setsearch] = useState("all");
+  const [filtercity,setfiltercity] = useState("all");
+  const [pucitcheck, setpucitcheck] = useState("yes");
+
   const [copy,setcopy] = useState(false)
   const [copytext,setcopytext] =useState("Click To Copy")
 
@@ -134,23 +137,26 @@ export default function Searchblood()
                       <div class="loader-section section-left"></div>
                       <div class="loader-section section-right"></div>
                     </div> :allusers.filter((val)=>{
-                      console.log(val);
-                if(search == "all")
+                if(val.patient_blood == search.toString() || search == "all")
                 {
+                  // console.log("bg filter");
                   return val;
                 }
-                else if(val.blood.includes(search.toString()))
+                
+                }).filter((val)=>{
+                if(val.patient_city == filtercity.toString() || filtercity =="all")
                 {
+                  // console.log("city filter");
                   return val;
                 }
-                // else if(val.city.includes(search.toString()))
-                // {
-                //   return val;
-                // }
-                // else if(val.pucit.includes(search.toString()))
-                // {
-                //   return val;
-                // }
+              }).filter((val)=>{
+                if(pucitcheck==="yes")
+                {
+                  // console.log("pucit check");
+                  console.log(val);
+                  return val;
+                }
+
               }).map((val,key)=>{ 
             return(
                   
