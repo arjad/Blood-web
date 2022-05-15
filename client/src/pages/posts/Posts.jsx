@@ -10,10 +10,10 @@ import Underline from "../../assets/underline.png";
 
 function Posts() 
 {
-  useEffect(()=>{
-    AOS.init({duration:3000});
-    gettdataback();
-  },[])
+  // useEffect(()=>{
+  //   AOS.init({duration:3000});
+  //   gettdataback();
+  // },[])
   const [search, setsearch] = useState("all")
   const [filtercity,setfiltercity] = useState("all");
   const[pucitcheck,setpucitcheck] =useState("yes");

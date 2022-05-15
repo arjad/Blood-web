@@ -69,10 +69,10 @@ function Loginform()
     e.preventDefault();
 
     //object destructring
-    const { fname, lname, blood, phoneno, email, pass } = user;
+    const { fname, lname, blood, email, pass } = user;
 
     console.log(fname,lname);
-    if(fname && lname && blood && phoneno && email && pass)
+    if(fname && lname && blood && email && pass)
     {
       //post to server address
       const res = await fetch("http://localhost:5000/users/insert", {
@@ -81,7 +81,7 @@ function Loginform()
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ fname, lname, blood, phoneno, email, pass })
+        body: JSON.stringify({ fname, lname, blood, email, pass })
       })
       const data = await res.json();
       if (data.status === 422 || !data) {
@@ -105,6 +105,8 @@ function Loginform()
           showConfirmButton: false,
           timer: 1500
         })
+
+        history.push("/profile")
       }
     }
     else{

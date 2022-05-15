@@ -85,7 +85,7 @@ app.get("/users/read/:uid",async (req,res)=>{
     console.log("a =" + a );
 })
 
-//get data from front end  & post to db
+//sign up user (init info)
 app.post("/users/insert",async (req,res)=>{
     console.log(" login body = ", req.body);
 
@@ -133,7 +133,9 @@ app.post("/users/logininsert",async (req,res)=>{
         }
         else{
             res.json({message:"sign in successfully done"})
-            console.log("login success"); 
+            console.log("login success");
+            //send all db data to front end
+            console.log("user last donated = " + userlogin.lastdonated) 
         }
     }
     else{

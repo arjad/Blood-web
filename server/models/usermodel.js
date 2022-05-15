@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { string } = require("yup");
 
 //user model
 const usermodel = new mongoose.Schema({
@@ -18,6 +19,9 @@ const usermodel = new mongoose.Schema({
         type:String,
     },
     phoneno:{
+        type:String,
+    },
+    lastdonated:{
         type:String,
     },
     city:{
