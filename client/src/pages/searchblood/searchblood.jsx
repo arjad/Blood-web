@@ -2,30 +2,16 @@ import {React,useEffect,useState} from 'react'
 import Footer from "../../common/footer/footer";
 import Underline from "../../assets/underline.png";
 import "./searchblood.css";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import ReactTooltip from "react-tooltip";
-
+import badge from "../../assets/pu.png";
 
 export default function Searchblood() 
 {
   const [load, setload] = useState();
   const [search, setsearch] = useState("all");
-  const [filtercity,setfiltercity] = useState("all");
-  const [pucitcheck, setpucitcheck] = useState("yes");
-
-  const [copy,setcopy] = useState(false)
-  const [copytext,setcopytext] =useState("Click To Copy")
+  const [filterarea,setfilterarea] = useState("all");
+  const [pucitcheck, setpucitcheck] = useState("both");
 
   let sr_no = 0;
-  useEffect(()=>{
-    if(copy)
-    {
-      setcopytext("Copied")
-      setTimeout(()=>{ setcopytext("Click To Copy")}, 3000);
-      setcopy(false)
-    }
-  },[copy])
-
   useEffect(()=>{
     getusers()
   },[])
@@ -84,30 +70,20 @@ export default function Searchblood()
                       <option value="AB-">AB-</option>
                     </select>
 
-                    <select name="Location" id="Location" required>
-                      <option value="" disabled selected>Select The City</option>
+                    <select onChange={(e)=>setfilterarea(e.target.value)} name="Location" id="Location" required>
+                      <option value="" disabled selected>Select The area</option>
                       <option value="all">All</option>
-                      <option value="Islamabad">Islamabad</option>
-                      <option value="Lahore">Lahore</option>
-                      <option value="Karachi">Karachi</option>
-                      <option value="Bahawalpur">Bahawalpur</option>
-                      <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-                      <option value="Faisalabad">Faisalabad</option>
-                      <option value="Gujranwala">Gujranwala</option>
-                      <option value="Gujrat">Gujrat</option>
-                      <option value="Jhelum">Jhelum</option>
-                      <option value="Kasur">Kasur</option>
-                      <option value="Rahim Yar Khan">Rahim Yar Khan</option>
-                      <option value="Sargodha">Sargodha</option>
-                      <option value="Sheikhupura">Sheikhupura</option>
-                      <option value="Sialkot">Sialkot</option>
+                      <option value="model town">Model Town</option>
+                      <option value="dha">dha</option>
+                      <option value="town ship">Town ship</option>
                       <option value="other">Other</option>
                     </select>
 
-                    <select name="bg" id="bg">
+                    <select onChange={(e)=>setpucitcheck(e.target.value)} name="bg" id="bg">
                       <option value="" disabled selected>You are from PUCIT</option>
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
+                      <option value="both">Both</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
                     </select>
 
                     <button onClick={getusers} className="btn filter-btn" type="button">Filter</button>
@@ -122,12 +98,12 @@ export default function Searchblood()
             <table class="table mt-3">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col">Sr #</th>
                   <th scope="col">Name</th>
                   <th scope='col'>Blood Group</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone No</th>
-                  <th scope="col">City</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">Last Donated</th>
+                  <th scope="col">Membership No</th>
                 </tr>
               </thead>
               <tbody>
@@ -137,50 +113,42 @@ export default function Searchblood()
                       <div class="loader-section section-left"></div>
                       <div class="loader-section section-right"></div>
                     </div> :allusers.filter((val)=>{
-                if(val.patient_blood == search.toString() || search == "all")
+                if(val.blood == search.toString() || search == "all")
                 {
-                  // console.log("bg filter");
                   return val;
                 }
                 
                 }).filter((val)=>{
-                if(val.patient_city == filtercity.toString() || filtercity =="all")
+                if(val.area == filterarea.toLowerCase().toString() || filterarea =="all")
                 {
-                  // console.log("city filter");
+                  // console.log("area filter");
                   return val;
                 }
               }).filter((val)=>{
-                if(pucitcheck==="yes")
+                if(pucitcheck =="both")
                 {
-                  // console.log("pucit check");
+                  return val;
+                }
+                if(val.pucit===pucitcheck)
+                {
+                  console.log("pucit check");
                   console.log(val);
                   return val;
                 }
-
               }).map((val,key)=>{ 
             return(
                   
               <tr>
-                <th scope="row">{sr_no + 1}</th>
+                <th scope="row">{key+1}
+                {(val.pucit == "yes")? <img className='pubadge' src={badge}/> : <span></span>}
+                </th>
+
                 <td>{val.fname} {val.lname}</td>
                 <td>{val.blood}</td>
-                <CopyToClipboard text={val.email}
-                  onCopy={() => setcopy(true)}>
-                  <td data-tip data-for="copying" className='email-copy'>{val.email}
-                    <ReactTooltip id="copying" className='bg-dark' place="bottom" effect="float">
-                      {copytext}
-                    </ReactTooltip>
-                  </td>
-                </CopyToClipboard>
-    
-                <td data-tip data-for="calling" >
-                  <a href={`tel:${val.phoneno}`}>
-                    {val.phoneno}
-                  </a>
-                  <ReactTooltip id="calling" className='bg-dark' place="bottom" effect="float">
-                      Click To Call
-                  </ReactTooltip>
-                </td>
+                <td>{val.area}</td>
+                <td>{val.last_donated}</td>
+                <td>{val._id}</td>
+                
               </tr>
               )})}     
               

@@ -21,7 +21,7 @@ const usermodel = new mongoose.Schema({
     phoneno:{
         type:String,
     },
-    lastdonated:{
+    last_donated:{
         type:String,
     },
     city:{
@@ -32,6 +32,12 @@ const usermodel = new mongoose.Schema({
     },
     area:{
         type:String,
+    }, 
+    country:{
+        type:String,
+    },
+    pucit:{
+        type:String
     }
 })
 //now create collection

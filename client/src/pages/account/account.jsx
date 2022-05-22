@@ -1,14 +1,15 @@
-import { MenuItem, Select } from '@mui/material'
-import React ,{useState} from 'react';
+import React ,{useContext,useEffect} from 'react';
 import Profile from './comp/Profile/profile';
 import Loginform from './comp/loginform/Loginform.jsx';
+import { useUserContext } from "../../context/userContext";
+
 export default function App() 
 {
-  const [isAuth, setIsAuth] = useState(false);
-    
+  const { user } = useUserContext();
+
   return (
     <div className="login-div ">
-      {isAuth ? (<div><Profile/><div><button onClick={()=>{setIsAuth(false)}}>Logout</button></div></div>) : (<div><Loginform/><button onClick={()=>{setIsAuth(true)}}>Login</button></div>) }	   
+      {user.isGuestUser ? <Loginform /> : <Profile />}
     </div>
   );
 }

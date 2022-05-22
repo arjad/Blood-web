@@ -1,6 +1,9 @@
 .contactus-div {
     font-size: 15px;
 }
+.contactus-div input:focus{
+    border:1px solid  #C1282D !important;
+}
 
 @-webkit-keyframes swinging {
     0% {

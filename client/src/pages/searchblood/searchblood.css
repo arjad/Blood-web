@@ -7,6 +7,10 @@
 }
 /* wallpaper on absout.css */
 /* earth rotationg */
+.pubadge{
+  width: 28px;
+  margin-left: 20px;
+}
 .earth {
   width: 300px;
   height: 300px;
