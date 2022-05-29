@@ -3,6 +3,10 @@ import Footer from "../../common/footer/footer";
 import Underline from "../../assets/underline.png";
 import "./searchblood.css";
 import badge from "../../assets/pu.png";
+import "react-responsive-modal/styles.css";
+import { useCallback } from 'react';
+import { render } from 'react-dom';
+import { useModal } from 'react-hooks-use-modal';
 
 export default function Searchblood() 
 {
@@ -11,6 +15,11 @@ export default function Searchblood()
   const [filterarea,setfilterarea] = useState("all");
   const [pucitcheck, setpucitcheck] = useState("both");
 
+  // modal
+  const [Modal, open, close, isOpen] = useModal('root', {
+    preventScroll: true,
+    closeOnOverlayClick: false
+  });
   let sr_no = 0;
   useEffect(()=>{
     getusers()
@@ -99,7 +108,7 @@ export default function Searchblood()
               <thead>
                 <tr>
                   <th scope="col">Sr #</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">Donor Name</th>
                   <th scope='col'>Blood Group</th>
                   <th scope="col">Area</th>
                   <th scope="col">Last Donated</th>
@@ -143,17 +152,85 @@ export default function Searchblood()
                 {(val.pucit == "yes")? <img className='pubadge' src={badge}/> : <span></span>}
                 </th>
 
-                <td>{val.fname} {val.lname}</td>
+                <td onClick={open}>{val.fname} {val.lname}</td>
                 <td>{val.blood}</td>
                 <td>{val.area}</td>
                 <td>{val.last_donated}</td>
                 <td>{val._id}</td>
                 
               </tr>
+
+              
               )})}     
               
               </tbody>
             </table>
+            {/* modal */}
+
+             
+              <Modal>
+                <div style={{background:'white'}}>
+                <section class="mb-4 mx-3">
+                  <button onClick={close}>CLOSE</button>
+
+                  <h2 class="h1-responsive font-weight-bold text-center my-4">Contact This Donor</h2>
+                  <p class="text-center w-responsive mx-auto mb-2">You can send email to this donor , requesting for blood on his/her provided email</p>
+
+                  <div class="row">
+                      <div class="col-md-12 mb-md-0 mb-5">
+                          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="md-form mb-0">
+                                          <label for="name" class="">Your name</label>
+                                          <input type="text" id="name" name="name" class="form-control"/>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="md-form mb-0">
+                                          <label for="email" class="">Your email</label>
+                                          <input type="text" id="email" name="email" class="form-control"/>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="md-form mb-0">
+                                          <label for="subject" class="">Subject</label>
+                                          <input type="text" id="subject" name="subject" class="form-control"/>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="md-form mb-0">
+                                          <label for="subject" class="">Subject</label>
+                                          <input type="text" id="subject" name="subject" class="form-control"/>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="md-form">
+                                          <label for="message">Your message</label>
+                                          <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+
+                          <div class="text-center text-md-left">
+                              <a class="btn btn-primary my-3" onclick="document.getElementById('contact-form').submit();">Send</a>
+                          </div>
+                          <div class="status"></div>
+                      </div>
+
+                  </div>
+
+                </section>
+                </div>
+
+              </Modal> 
+
             </div>
             </div>
         

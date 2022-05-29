@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 export const userContext = createContext({
   user: null,
-  logIn: () => {},
+  logInc: () => {},
   logOut: () => {},
 });
 
@@ -11,7 +11,7 @@ const USER = { name: "Guest", isGuestUser: true };
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(USER);
 
-  function logIn(username) {
+  function logInc(username) {
     setUser({ isGuestUser: false, name: username });
   }
 
@@ -20,14 +20,14 @@ export function UserContextProvider({ children }) {
   }
 
   return (
-    <userContext.Provider value={{ user, logIn, logOut }}>
+    <userContext.Provider value={{ user, logInc, logOut }}>
       {children}
     </userContext.Provider>
   );
 }
 
 export function useUserContext() {
-  const { user, logIn, logOut } = useContext(userContext);
+  const { user, logInc, logOut } = useContext(userContext);
 
-  return { user, logIn, logOut };
+  return { user, logInc, logOut };
 }

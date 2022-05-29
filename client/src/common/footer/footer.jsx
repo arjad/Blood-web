@@ -17,6 +17,7 @@ export default function footer()
                 <div className="col-lg-4 footer-2nd">
                     <div className="smartphone" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <div className="content"></div>
+                        {/* modal */}
                         <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog modal-dialog-centered">
                                 <div className="modal-content">
