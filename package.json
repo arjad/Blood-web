@@ -6,6 +6,7 @@
     "react-hooks-use-modal": "^2.1.0",
     "react-responsive-carousel": "^3.2.23",
     "react-responsive-modal": "^6.2.0",
+    "react-sliding-pane": "^7.1.0",
     "react-tooltip": "^4.2.21",
     "yup": "^0.32.11"
   },

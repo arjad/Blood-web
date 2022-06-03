@@ -2,14 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(cors())
-const ObjectId = require('mongodb').ObjectId; 
+// const ObjectId = require('mongodb').ObjectId; 
 
 //to host our website we keep port number in env filess
 const port  = process.env.PORT || 5000;
 const path = require("path");
 const mongoose = require("mongoose");
 const { emitWarning, nextTick } = require("process");
-
 //model imort 
 const PostModal = require("./models/postmodel");
 const UserModal = require("./models/usermodel");
@@ -27,7 +26,7 @@ mongoose.connect(process.env.MONGODB_URI || DB, {
     console.log("connected with mongo db");
 })
 .catch((e)=>{
-    console.log(e, " error in connection ");
+    console.log(e, " error in mongo connection ");
 })
 
 const static_path_of_index = path.join(__dirname, "../public");
@@ -35,10 +34,10 @@ app.use(express.json());//to handle json data
 app.use(express.urlencoded({extended:false}));
 app.use( express.static(static_path_of_index));
 
-// Set EJS as templating engine 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.set("view engine", "ejs");
+// // Set EJS as templating engine 
+// app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.set("view engine", "ejs");
 
 //home
 app.get("/",(req,res)=>{
@@ -49,14 +48,13 @@ app.get("/",(req,res)=>{
 ////////
 // read all users
 app.get("/users/read",async (req,res)=>{
-
     const u = await UserModal.find();
     res.send(u);
-    console.log("=== All Users are Shown === ");
+    console.log("== All Users are Shown ");
 })
 
 ////////
-// read single users
+// read single user
 app.get("/users/read/:uid",async (req,res)=>{
 
     var id = req.params.id;       
@@ -85,7 +83,9 @@ app.get("/users/read/:uid",async (req,res)=>{
     console.log("a =" + a );
 })
 
-//sign up user (init info)
+
+////////
+//  sign up  single user (init info)
 app.post("/users/insert",async (req,res)=>{
     console.log(" login body = ", req.body);
 
@@ -112,7 +112,8 @@ app.post("/users/insert",async (req,res)=>{
 })
 
 
-//login data from front end  & post to db
+//////
+// login single user
 app.post("/users/logininsert",async (req,res)=>{
     console.log(" login data from front end = ", req.body);
 
@@ -146,18 +147,18 @@ app.post("/users/logininsert",async (req,res)=>{
 
 
 /////////
-// read data from db       run at port 5000
+// read all posts
 app.get("/posts/read",async (req,res)=>{
 
     const r = await PostModal.find();
     res.send(r);
-    console.log("================Post  DATA is Shown ========== ");
+    console.log("== Post  DATA is Shown");
 })
 
 
 
 //////////
-//get data from front end  & post to db
+//  insert post
 app.post("/posts/insert",async (req,res)=>{
     console.log("Post added, req= ", req.body)    
 
@@ -175,9 +176,7 @@ app.post("/posts/insert",async (req,res)=>{
     
     }
     try{
-
         const post = new PostModal({patient_blood,patient_name,pucit_roll,mobile_no,email,patient_address,patient_city,hospital_name});
-        
         const data_entered = post.save();
         if(data_entered)
         {
@@ -198,21 +197,47 @@ app.post("/posts/insert",async (req,res)=>{
 
 
 /////////
-// update
-app.put("/posts/update", async (req,res)=>{
+// update single user profile
+app.put("/user/profileupdate", async (req,res)=>{
+    console.log("updating user profile");
 
-    const updated_name = req.body.updated_food_name;
-    const updated_price = req.body.updated_food_price;
-    const id = req.body.id;
-
+    const id = req.body._id;
+    const u_fname = req.body.fname;
+    const u_lname = req.body.lname;
+    const u_phoneno = req.body.phoneno;
+    const u_email = req.body.email;
+    const u_pass = req.body.pass;
+    
     try{
-        await post.findById(id, (err, updated)=>{
-            updated.productname = updated_name;
-            updated.productprice= updated_price;
+        await UserModal.findById(id, (err, updated)=>{
+            if(u_fname != "")
+            {
+                updated.fname = u_fname;
+            }
+            if(u_lname != "")
+            {
+                updated.lname = u_lname;
+            }
+            if(u_phoneno != "")
+            {
+                updated.phoneno = u_phoneno;
+            }
+            if(u_email != "")
+            {
+                updated.email = u_email;
+            }
+            if(u_pass != "")
+            {
+                updated.pass = u_pass;
+            }
+            if(u_pass != "")
+            {
+                updated.lastdonated = "today"
+            }
             updated.save();
             res.send("updated");
 
-            console.log(" Food Updated = ", updated);            
+            console.log("Updated User= ", updated);            
          })
     }
     catch(e)
@@ -232,11 +257,10 @@ app.delete('/posts/delete/:id',async  function(req, res) {
   
 });
 
-//wrong url errror on 5000 port browser
+//wrong url, errror on 5000 port browser
 app.get("*",(req,res)=>{
     res.sendFile(__dirname + "/404.html");
 })
-
 
 
 app.listen(port ,()=>{

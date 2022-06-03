@@ -51,7 +51,6 @@ export default function Searchblood()
     })
     .catch((error) => console.error("FETCH ERROR:", error));
   }
-
     return (
         <div>
             <div className="wallpaper mb-5 container-fluid">

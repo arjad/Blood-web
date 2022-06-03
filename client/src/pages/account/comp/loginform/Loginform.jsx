@@ -189,15 +189,15 @@ function Loginform()
             <input type="text" placeholder="First Name" name='fname' onChange={handleinput} required/>
             <input type="text" placeholder="Last Name" name='lname' onChange={handleinput} required/>
               <select onChange={handleinput} name="blood" id="bg">
-                      <option value="" disabled selected>Select Blood Group</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
+                <option value="" disabled selected>Select Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
               </select>
             
             <input type="email" placeholder="Email" name='email' onChange={handleinput} required/>
