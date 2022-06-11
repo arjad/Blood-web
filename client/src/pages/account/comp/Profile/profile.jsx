@@ -6,6 +6,7 @@ import { useUserContext } from "../../../../context/userContext";
 import axios from "axios";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
+import pulogo from "../../../../assets/pu.png";
 
 function Profile() 
 {
@@ -118,28 +119,27 @@ function Profile()
   const { uid } = useParams();
 
   return (
-  <div>
-      <button class="btn-green btn mt-3" onClick={getsingleuserinfo}>
-	      <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/> <p>Reload</p>
-	    </button>
-
-	         
-    <div class="rounded bg-transparent mx-5 mb-0">
-        <div className="ui message success">
-          <h3>You are now logged in as , {user.name}</h3>
-            {!user.isGuestUser && (
-              <button className="btn btn-primary" onClick={logOut}>
-                LogOut
-              </button>
-            )}
-        </div>
-
-
+  <div>	         
+    <div class="rounded bg-transparent mb-0">
     <div class="row ">
         <div class="col-3">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span class="font-weight-bold">Edogaru</span>
-              <span class="text-black-50">{mydata.email}</span><span> </span>
+              
+              <button className='btn btn-green mt-3' onClick={() => setState({ isPaneOpen: true })}>
+                Edit
+              </button>
+              <button class="btn-green btn mt-3" onClick={getsingleuserinfo}>
+	              <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/> <p>Reload</p>
+	            </button>
+
+              {!user.isGuestUser && (
+                <button className="btn btn-green mt-3" onClick={logOut}>
+                  LogOut
+                </button>
+              )}
+
+
             </div>
         </div>
 
@@ -169,11 +169,11 @@ function Profile()
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Pucitian <sm>(public)</sm></label>
-                            <input type="text" class="form-control" placeholder="yes or no" name=""/>
+                            <input type="text" class="form-control" placeholder="yes or no" name="" value={mydata.pucit}/>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Pucit Roll No <sm>(private)</sm></label>
-                            <input type="text" class="form-control" placeholder="in captals"/>
+                            <input type="text" class="form-control" placeholder="in captals" value={mydata.pucit}/>
                         </div>
 
                     </div>
@@ -184,11 +184,11 @@ function Profile()
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Password  <sm>(private)</sm></label>
-                            <input type="password" class="form-control" placeholder="at least 8 characters" />
+                            <input type="password" class="form-control" placeholder="at least 8 characters" value={mydata.pass}/>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Phone No  <sm>(private)</sm></label>
-                            <input type="text" class="form-control" placeholder="Active number" />
+                            <input type="text" class="form-control" placeholder="Active number" value={mydata.phoneno}/>
                         </div>
 
                     </div>
@@ -196,22 +196,18 @@ function Profile()
 
                         <div class="col-md-6">
                             <label class="labels">Area <sm>(public)</sm></label>
-                            <input type="text" class="form-control" placeholder="Your Muhala Name"/>
+                            <input type="text" class="form-control" placeholder="Your Muhala Name" value={mydata.area}/>
                         </div>
                         <div class="col-md-6">
                             <label class="labels">City <sm>(public)</sm></label>
-                            <input type="text" class="form-control" placeholder=" Your City"/>
+                            <input type="text" class="form-control" placeholder=" Your City" value={mydata.city}/>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Country <sm>(public)</sm></label>
-                            <input type="text" class="form-control" placeholder="Your Country"/>
+                            <input type="text" class="form-control" placeholder="Your Country" value={mydata.country}/>
                         </div>
                     </div>
                     
-                    <button className='btn btn-green' onClick={() => setState({ isPaneOpen: true })}>
-                      Edit
-                    </button>
-
 
                     <SlidingPane
                       className="some-custom-class"
@@ -219,7 +215,6 @@ function Profile()
                       isOpen={state.isPaneOpen}
                       title="Edit your Details"
                       onRequestClose={() => {
-                        // triggered on "<" on left top click or on outside click
                         setState({ isPaneOpen: false });
                       }}>
 
@@ -232,37 +227,44 @@ function Profile()
                         <label class="labels">Last Name <sm>(public)</sm></label>
                         <input type="text" class="form-control" placeholder="surname" name="lname" onChange={handleinput}/>
                     </div>
-
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <label class="labels">Blood Group <sm>(public)</sm></label>
                             <input type="text" class="form-control" onChange={handleinput} placeholder="in captals" name="blood"/>
                         </div>
                         <div class="col-md-12">
-                            <label class="labels">Pucitian <sm>(public)</sm></label>
-                            <input type="text" class="form-control" placeholder="yes or no" name="pucit" onChange={handleinput}/>
-                        </div>
-                        <div class="col-md-12">
                             <label class="labels">Pucit Roll No <sm>(private)</sm></label>
-                            <input type="text" class="form-control" placeholder="in captals" onChange={handleinput}/>
+                            <input type="text" class="form-control" placeholder="in captals" name='pucit' onChange={handleinput}/>
                         </div>
 
                         <div class="col-md-12">
                             <label class="labels">Email  <sm>(private)</sm></label>
-                            <input type="text" class="form-control" onChange={handleinput} placeholder="enter active email"/>
+                            <input type="text" class="form-control" onChange={handleinput} name="email" placeholder="enter active email"/>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Password  <sm>(private)</sm></label>
-                            <input type="password" class="form-control"  onChange={handleinput} placeholder="at least 8 characters" />
+                            <input type="password" class="form-control"  onChange={handleinput} name="pass" placeholder="at least 8 characters" />
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Phone No  <sm>(private)</sm></label>
-                            <input type="text" class="form-control" onChange={handleinput} placeholder="Active number" />
+                            <input type="text" class="form-control" onChange={handleinput} name="phoneno" placeholder="Active number" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Area <sm>(private)</sm></label>
+                            <input type="text" class="form-control" onChange={handleinput} name="area" placeholder="Muhala" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">City <sm>(private)</sm></label>
+                            <input type="text" class="form-control" onChange={handleinput} name="city" placeholder="Current" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Country  <sm>(private)</sm></label>
+                            <input type="text" class="form-control" onChange={handleinput} name="country" placeholder="Current" />
                         </div>
 
                     </div>
                     <div class="mt-5 text-center">
-                        <button class="btn-green btn" type="button" onClick={save_update}>Update Profile</button>
+                        <button class="btn-green btn" type="button" onClick={save_update}>Update</button>
                     </div>
                 </div>
       </SlidingPane>
@@ -273,20 +275,47 @@ function Profile()
         </div>
 
         <div class="col-3">
-            <div class="p-3 py-5">
-                <div class="col-md-12">
-                    <label class="labels">Medical Record <sm>(private)</sm></label>
-                    <input type="text" class="form-control" placeholder="experience" value=""/>
-                </div> <br/>
-                <div class="col-md-12">
-                    <label class="labels">Injures <sm>(private)</sm></label>
-                    <input type="text" class="form-control" placeholder="additional details" value=""/>
-                </div>
-            </div>
-        </div>
-</div>
+        <div class="card-container mt-5">
 
-</div>
+          <div class="front">
+              <div class="imagedivs">
+                  <img src={pulogo} alt=""/>
+                  {/* <img src="image/visa.png" alt=""/> */}
+                  <img src=
+"https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
+		className="qr-codes img-thumbnail img-responsive" />
+	
+              </div>
+              <div class="card-number-box">{mydata._id}</div>
+                <div class="flexbox">
+                  <div class="boxes">
+                      <span>Card holder</span>
+                      <div class="card-holder-name">{mydata.fname} {mydata.lname}</div>
+                  </div>
+                  <div class="boxes">
+                    <span>Expires</span>
+                    <div class="expiration">
+                      <span class="exp-month">Dec </span>
+                      <span class="exp-year"> 2025</span>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+          <div class="back">
+                <div class="stripe"></div>
+                <div class="boxes">
+                    <span>Blood Group : {mydata.blood}</span>
+                    <div class="cvv-box">ccv</div>
+                    <img src={pulogo} alt=""/>
+                </div>
+          </div>
+
+          </div>
+        </div>
+
+    </div>
+  </div>
 </div>
   )
 }

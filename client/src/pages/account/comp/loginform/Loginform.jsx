@@ -73,7 +73,7 @@ function Loginform()
     //object destructring
     const { fname, lname, blood, email, pass } = user;
 
-    console.log(fname,lname);
+    // console.log(fname,lname);
     if(fname && lname && blood && email && pass)
     {
       //post to server address
@@ -139,6 +139,9 @@ function Loginform()
     })
     const data = await res.json();
     // res.json has message in json formate
+    console.log("login data");
+    console.log(data);
+
     if ( data.message=="Invalid Credientials" || !data) {
       Swal.fire({
         position: 'top-end',
@@ -152,6 +155,11 @@ function Loginform()
     }
     else if (data.message=="sign in successfully done") {
       console.log("login POST- valid reg ");
+
+      if(data.mytoken)
+      {
+        localStorage.setItem("logintoken",data.mytoken)
+      }
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -161,7 +169,7 @@ function Loginform()
         timer: 1500
       })
       logInc(login_email);
-      console.log("email = " + login_email)
+      // console.log("email = " + login_email)
     }
   }
 

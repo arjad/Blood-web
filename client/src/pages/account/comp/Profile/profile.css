@@ -37,3 +37,109 @@
     cursor: pointer;
     border: solid 1px #C1282D
 }
+
+.slide-pane__content{
+    z-index: 100;
+}
+
+/* ///card */
+
+
+
+ .card-container{
+    margin-bottom: -150px;
+    position: relative;
+    height: 250px;
+    width: 400px;
+}
+
+ .card-container .front{
+    background:linear-gradient(45deg, rgb(226, 29, 22), rgb(56, 56, 51));
+    border-radius: 15px;
+    margin-top: 20px;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    padding:20px;
+    transform:perspective(1000px) rotateY(0deg);
+    transition:transform .4s ease-out;
+}
+
+.card-container .front .imagedivs{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    /* padding-top: 10px; */
+}
+
+ .card-container .front .imagedivs img{
+    height: 50px;
+    width: 42px;
+}
+.card-container .front .qr-codes{
+    height: 55px !important;
+    width: 55px !important;
+}
+ .card-container .front .card-number-box{
+    padding:30px 0;
+    font-size: 22px;
+    color:#fff;
+}
+
+ .card-container .front .flexbox{
+    display: flex;
+}
+
+ .card-container .front .flexbox .boxes:nth-child(1){
+    margin-right: auto;
+}
+
+ .card-container .front .flexbox .boxes{
+    font-size: 15px;
+    color:#fff;
+}
+
+ .card-container .back{
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    background:linear-gradient(45deg, rgb(226, 29, 22), rgb(56, 56, 51));
+    border-radius: 15px;
+    padding: 20px 0;
+    text-align: right;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    /* transform:perspective(1000px) rotateY(180deg); */
+    transition:transform .4s ease-out;
+}
+
+ .card-container .back .stripe{
+    background: #000;
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+}
+
+ .card-container .back .boxes{
+    padding: 0 20px;
+}
+
+ .card-container .back .boxes span{
+    color:#fff;
+    font-size: 15px;
+}
+
+.card-container .back .boxes .cvv-box{
+    height: 50px;
+    padding: 10px;
+    margin-top: 5px;
+    color:#333;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+}
+
+ .card-container .back .boxes img{
+    margin-top: 14px;
+    width: 40px;
+    height: 46px;
+}

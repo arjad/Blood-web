@@ -14,6 +14,8 @@ const PostModal = require("./models/postmodel");
 const UserModal = require("./models/usermodel");
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 
 //connection to mongo db
 const DB = "mongodb://arjad:123@cluster0-shard-00-00.cl5kh.mongodb.net:27017,cluster0-shard-00-01.cl5kh.mongodb.net:27017,cluster0-shard-00-02.cl5kh.mongodb.net:27017/fyp-db?ssl=true&replicaSet=atlas-peik6a-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -115,7 +117,7 @@ app.post("/users/insert",async (req,res)=>{
 //////
 // login single user
 app.post("/users/logininsert",async (req,res)=>{
-    console.log(" login data from front end = ", req.body);
+    // console.log(" login data from front end = ", req.body);
 
     const {login_email, login_pass} = req.body;
     if(!login_email || !login_pass)
@@ -126,17 +128,26 @@ app.post("/users/logininsert",async (req,res)=>{
     const userlogin = await UserModal.findOne({email:login_email})
     if(userlogin)
     {
-        console.log("user login = "+userlogin);
+        // console.log("user login = "+userlogin);
         if(login_pass !== userlogin.pass)
         {
             console.log("Invalid login Credientials");
             res.status(400).json({message:"Invalid Credientials"})
         }
         else{
-            res.json({message:"sign in successfully done"})
+            const token = jwt.sign({
+                email:login_email
+            },
+            "secret123"
+            );
+            
+            // console.log("token genterated successfully");
+            // console.log(token);
+
+            res.json({message:"sign in successfully done", mytoken:token})
             console.log("login success");
             //send all db data to front end
-            console.log("user last donated = " + userlogin.lastdonated) 
+
         } 
     }
     else{
@@ -201,13 +212,18 @@ app.post("/posts/insert",async (req,res)=>{
 app.put("/user/profileupdate", async (req,res)=>{
     console.log("updating user profile");
 
-    const id = req.body._id;
-    const u_fname = req.body.fname;
-    const u_lname = req.body.lname;
-    const u_phoneno = req.body.phoneno;
-    const u_email = req.body.email;
-    const u_pass = req.body.pass;
-    
+    let id = req.body._id;
+    let u_fname = req.body.fname;
+    let u_lname = req.body.lname;
+    let u_phoneno = req.body.phoneno;
+    let u_email = req.body.email;
+    let u_pass = req.body.pass;
+    let u_last_donated = req.body.last_donated;
+    let u_area= req.body.area;
+    let u_city = req.body.city;
+    let u_country= req.body.country;
+    let u_pucit = req.body.pucit;
+
     try{
         await UserModal.findById(id, (err, updated)=>{
             if(u_fname != "")
@@ -230,10 +246,27 @@ app.put("/user/profileupdate", async (req,res)=>{
             {
                 updated.pass = u_pass;
             }
-            if(u_pass != "")
+            if(u_lastdonated != "")
             {
-                updated.lastdonated = "today"
+                updated.lastdonated = u_last_donated;
             }
+            if(u_area != "")
+            {
+                updated.area  = u_area;
+            }
+            if(u_city != "")
+            {
+                updated.city  = u_city;
+            }
+            if(u_country != "")
+            {
+                updated.country  = u_country;
+            }
+            if(u_pucit != "")
+            {
+                updated.pucit  = u_pucit;
+            }
+
             updated.save();
             res.send("updated");
 
