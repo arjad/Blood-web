@@ -7,6 +7,12 @@ import Avatar from "../../assets/avatar.png";
 import Footer from '../../common/footer/footer';
 import Swal from 'sweetalert2';
 import Underline from "../../assets/underline.png";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
 
 function Posts() 
 {
@@ -209,7 +215,7 @@ function Posts()
 
               </div>         
 
-                <div className="col-lg-6 col-sm-12 bg-transparent p-5">
+                <div className="posting-form col-lg-6 col-sm-12 bg-transparent p-5">
                     <h3>Add New Post</h3>                   
                       <form method='POST' id="stripe-login">
                       <div className="field padding-bottom--24">
@@ -298,7 +304,7 @@ function Posts()
             {/* /////////////// */}
             {/* show all db data */}
 	          
-            <h2 className='my-3 text-center'> Posts</h2>
+            <h2 className='my-3 text-center post-headings'> Posts</h2>
 
             {/* //filter data */}
             <div className='post_search bg-white'>
@@ -346,21 +352,21 @@ function Posts()
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
-
-                    {/* <button onClick={gettdataback} className="btn filter-btn" type="button">Filter</button> */}
                 </div>
               </div>
-
-
-
             <br/>
 
             <div className='all-pro-div container mb-5 '>
               
-              <button class="btn-green btn mx-auto" onClick={gettdataback}>
-    	      		<img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/> <p>Reload</p>
-    	        </button>
-              <section className='d-flex justify-content-center flex-wrap '>
+              <div className='three-btn-div w-100 d-flex justify-content-center'>
+                <button onClick={()=>window.print()}><LocalPrintshopIcon/></button>
+                <Pdf targetRef={ref} filename="allposts.pdf">
+                  {({ toPdf }) => <button onClick={toPdf}><DownloadIcon/></button>}
+                </Pdf>
+                <RefreshIcon className='btn-ref' onClick={gettdataback}/>
+              </div>
+              
+              <section className='d-flex justify-content-center flex-wrap' ref={ref}>
               {load ?<div id="loader-wrapper">
                         <div id="loader"></div>
                         <div class="loader-section section-left"></div>
@@ -382,7 +388,7 @@ function Posts()
                 if(pucitcheck==="yes")
                 {
                   // console.log("pucit check");
-                  console.log(val);
+                  // console.log(val);
                   return val;
                 }
 

@@ -7,6 +7,11 @@ import axios from "axios";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import pulogo from "../../../../assets/pu.png";
+import PrintIcon from '@mui/icons-material/Print';
+import Pdf from "react-to-pdf";
+import DownloadIcon from '@mui/icons-material/Download';
+
+const ref = React.createRef();
 
 function Profile() 
 {
@@ -119,7 +124,7 @@ function Profile()
   const { uid } = useParams();
 
   return (
-  <div>	         
+  <div className='profile-div'>	         
     <div class="rounded bg-transparent mb-0">
     <div class="row ">
         <div class="col-3">
@@ -274,17 +279,13 @@ function Profile()
             </div>
         </div>
 
-        <div class="col-3">
-        <div class="card-container mt-5">
+        <div class="col-lg-3 col-md-12">
+          <div class="card-container my-5" ref={ref}>
 
-          <div class="front">
+            <div class="front">
               <div class="imagedivs">
                   <img src={pulogo} alt=""/>
-                  {/* <img src="image/visa.png" alt=""/> */}
-                  <img src=
-"https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
-		className="qr-codes img-thumbnail img-responsive" />
-	
+                  <img src={`https://chart.googleapis.com/chart?cht=qr&chl=${mydata._id}&chs=160x160&chld=L|0`} className="qr-codes img-thumbnail" />
               </div>
               <div class="card-number-box">{mydata._id}</div>
                 <div class="flexbox">
@@ -300,17 +301,25 @@ function Profile()
                     </div>
                   </div>
                 </div>
-          </div>
+            </div>
 
-          <div class="back">
+            <div class="back">
                 <div class="stripe"></div>
                 <div class="boxes">
                     <span>Blood Group : {mydata.blood}</span>
                     <div class="cvv-box">ccv</div>
                     <img src={pulogo} alt=""/>
                 </div>
-          </div>
+            </div>
 
+          </div>
+          
+          <div className='btn-down-print'>
+            <button className='btnsss' onClick={()=>window.print()}><PrintIcon/></button>
+            <Pdf targetRef={ref} filename="membership_card.pdf">
+              {({ toPdf }) => <button className='btnsss' onClick={toPdf}><DownloadIcon/></button>}
+            </Pdf>
+      
           </div>
         </div>
 

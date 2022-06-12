@@ -47,9 +47,6 @@
 
 
  .card-container{
-    margin-bottom: -150px;
-    position: relative;
-    height: 250px;
     width: 400px;
 }
 
@@ -142,4 +139,34 @@
     margin-top: 14px;
     width: 40px;
     height: 46px;
+}
+.btn-down-print{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnsss{
+    padding: 4px;
+    border-radius: 50%;
+    margin-left:5px;
+    margin-right: 5px;
+}
+
+/* print */
+@media print{
+    .profile-div .row .col-3, .profile-div .row .col-5{
+        display: none;
+    }
+    .main-nav{
+        opacity: 0;
+    }
+    .btn-down-print{
+        display: none;
+    }
+    .post-div .post_search, .post-div .posting-form , .post-div .app  ,  .post-div .three-btn-div{
+        display: none;
+    }
+    .post-div section{
+        display: block !important;
+    } 
 }

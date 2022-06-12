@@ -549,3 +549,16 @@ body:active * {
   position: absolute;
   right: 0px;
 }
+.post-div .three-btn-div button , .post-div .three-btn-div .btn-ref{
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 50%;
+  border:2px solid black;
+  outline: none !important;
+  height: 38px;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
