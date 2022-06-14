@@ -16,12 +16,7 @@ export function UserContextProvider({ children }) {
   }
 
   function logOut() {
-    if(localStorage.getItem("logintoken"))
-    {
-      localStorage.removeItem("logintoken")
-      alert("local storage cleared")
-      setUser(USER);
-    }
+    
   }
 
   return (

@@ -48,42 +48,73 @@ app.get("/",(req,res)=>{
 
 
 ////////
-// read all users
-app.get("/users/read",async (req,res)=>{
+// read all users (search blood)
+app.get("/users/donors",async (req,res)=>{
     const u = await UserModal.find();
     res.send(u);
     console.log("== All Users are Shown ");
 })
 
+
 ////////
-// read single user
-app.get("/users/read/:uid",async (req,res)=>{
+// read one (profile)
+app.get("/users/read",async (req,res)=>{
+    // const u = await UserModal.find();
+    // res.send(u);
 
-    var id = req.params.id;       
-    var good_id = new ObjectId("622f35670be6aaf768594481");
+    const token = req.headers['x-access-token']
+    // console.log("token is ");
+    // console.log(token);
 
-    //you can now query
-    const a = await UserModal.find({_id: ObjectId('622f35670be6aaf768594481')})
-    .then((userfound)=>{
-        if(userfound)
-        {
-            console.log("=== Single User === " + userfound);
-            return res.status(200).json(userfound);
-            // res.status(201).json({message:userfound})
+	try {
+		const decoded = jwt.verify(token, 'secret123')
+		// console.log("decodec = ");
+		// console.log(decoded);
+		
+		const email = decoded.email
+		const user = await UserModal.findOne({ email: email })
 
-        }
-        else if(userfound === NULL && !userfound)
-        {
-            console.log("user not found");
-            return res.sendStatus(404).end();       
-        }
-    })
-    .catch((e)=>{
-        next(e);
-        console.log("error = " + e)
-    });
-    console.log("a =" + a );
+        // console.log("matcher user");
+        // console.log(user);
+
+		return res.json({ status: 'ok', matcheduser: user })
+	}
+    catch (error) 
+    {
+		// console.log("catch error ====== " + error)
+		res.json({ status: 'error', error: 'invalid token' })
+	}
 })
+
+// ////////
+// // read single user
+// app.get("/users/read/:uid",async (req,res)=>{
+
+//     var id = req.params.id;       
+//     var good_id = new ObjectId("622f35670be6aaf768594481");
+
+//     //you can now query
+//     const a = await UserModal.find({_id: ObjectId('622f35670be6aaf768594481')})
+//     .then((userfound)=>{
+//         if(userfound)
+//         {
+//             console.log("=== Single User === " + userfound);
+//             return res.status(200).json(userfound);
+//             // res.status(201).json({message:userfound})
+
+//         }
+//         else if(userfound === NULL && !userfound)
+//         {
+//             console.log("user not found");
+//             return res.sendStatus(404).end();       
+//         }
+//     })
+//     .catch((e)=>{
+//         next(e);
+//         console.log("error = " + e)
+//     });
+//     console.log("a =" + a );
+// })
 
 
 ////////
@@ -280,15 +311,15 @@ app.put("/user/profileupdate", async (req,res)=>{
 })
 
 
-app.delete('/posts/delete/:id',async  function(req, res) {
+// app.delete('/posts/delete/:id',async  function(req, res) {
 
-    const id = req.params.id;
-    await post.findByIdAndRemove(id).exec();
+//     const id = req.params.id;
+//     await post.findByIdAndRemove(id).exec();
 
-    res.send("Deleted");
-    console.log("Food DELETED ");
+//     res.send("Deleted");
+//     console.log("Food DELETED ");
   
-});
+// });
 
 //wrong url, errror on 5000 port browser
 app.get("*",(req,res)=>{

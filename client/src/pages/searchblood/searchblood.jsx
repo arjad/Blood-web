@@ -33,7 +33,7 @@ export default function Searchblood()
     setload(true)
 
     //getting response from api (or mongo db as both have same data)
-    fetch("http://localhost:5000/users/read")
+    fetch("http://localhost:5000/users/donors")
     .then((response) => {
       if (response.ok) 
       {
@@ -46,7 +46,7 @@ export default function Searchblood()
     })
     .then(data => {
       setload(false)
-      console.log("READ-   All Users = ", data);
+      console.log("READ-   All donors = ", data);
       setallusers([...data])
     })
     .catch((error) => console.error("FETCH ERROR:", error));

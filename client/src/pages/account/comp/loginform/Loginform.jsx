@@ -169,6 +169,8 @@ function Loginform()
         timer: 1500
       })
       logInc(login_email);
+			window.location.href = '/profile'
+
       // console.log("email = " + login_email)
     }
   }
@@ -188,7 +190,7 @@ function Loginform()
   };
 
   return (
-    <div>
+    <div className="login-div">
       <div className="container login-divs my-5">
         <div class="form-container sign-up-container border">
           {/* sign up */}

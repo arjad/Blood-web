@@ -14,6 +14,7 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { UserContextProvider } from "./context/userContext";
+import Loginform from './pages/account/comp/loginform/Loginform';
 
 
 function App() 
@@ -48,13 +49,11 @@ function App()
                     <Route path="/about" exact component={About}/>
                     <Route path="/searchblood" exact component={Searchblood}/>
                     <Route path="/contact" exact component={Contactus}/>
-                    <Route path="/account" exact component={Acoount}/>
+                    {/* <Route path="/account" exact component={Acoount}/> */}
                     <Route path="/privacypolicy" exact component={Privacy}/>
                     <Route path="/posts" exact component={Post}/>
+                    <Route path="/login" exact component={Loginform} />
                     <Route path="/profile" exact component={Profile} />
-                    <Route path="/dashboard/:uid">
-                        <Profile/>
-                    </Route>
                     <Route><ErrorPage/></Route>
                 </Switch>
 

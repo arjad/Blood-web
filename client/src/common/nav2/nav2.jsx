@@ -54,7 +54,7 @@ return (
 
             </li>
             <li>
-              <Link to="/account">Account</Link>
+              <Link to="/login">Account</Link>
               <img className="underline-img" src={Underline}/>
 
             </li>

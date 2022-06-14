@@ -10,6 +10,9 @@ import pulogo from "../../../../assets/pu.png";
 import PrintIcon from '@mui/icons-material/Print';
 import Pdf from "react-to-pdf";
 import DownloadIcon from '@mui/icons-material/Download';
+import Swal from 'sweetalert2';
+
+// import { set } from 'mongoose';
 
 const ref = React.createRef();
 
@@ -22,9 +25,9 @@ function Profile()
   });
 
 
-  const { logInc } = useUserContext();
+  // const { logInc } = useUserContext();
   const [load, setload] = useState();
-  const { user, logOut } = useUserContext();
+  // const { user, logOut } = useUserContext();
   const [mydata,setmydata] = useState({
     _id:"",
     fname:"",
@@ -50,8 +53,15 @@ function Profile()
   const getsingleuserinfo = async (e)=>{  
     console.log("reload - single user function");
     setload(true)
+    
+    console.log("my data");
+    console.log(mydata);
 
-    fetch("http://localhost:5000/users/read")
+    const req = await fetch("http://localhost:5000/users/read", {
+			headers: {
+				'x-access-token': localStorage.getItem('logintoken'),
+			},
+    })
     .then((response) => {
       if (response.ok) 
       {
@@ -64,16 +74,46 @@ function Profile()
     })
     .then(data => {
       setload(false)
-      // console.log("READ-single users = ", data);
-      function isCherries(i) { 
-        return i.email == user.name;
-      }
-      setmydata(data.find(isCherries)); 
+      console.log("matxged");
+      console.log(data.matcheduser);
+      setmydata(data.matcheduser)
+
+      setmydata({
+        _id:data.matcheduser._id,
+        fname:data.matcheduser.fname,
+        lname:data.matcheduser.lname,
+        email:data.matcheduser.email,
+        blood:data.matcheduser.blood,
+        pass:data.matcheduser.pass,
+        phoneno:data.matcheduser.phoneno,
+        last_donated:data.matcheduser.last_donated, 
+        city:data.matcheduser.city,
+        country:data.matcheduser.country,
+        area:data.matcheduser.area,  
+        country:data.matcheduser.country, 
+        pucit:data.matcheduser.pucit
+      })
 
       // console.log("mydata")
       // console.log(mydata);
     })
-    .catch((error) => console.error("FETCH ERROR:", error));
+    .catch((error) => {
+      console.log("FETCH ERROR:", error)
+
+      Swal.fire({
+        title: 'Login First',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+
+			window.location.href = '/login'
+      
+      
+    });
   }
 
   //update
@@ -123,6 +163,17 @@ function Profile()
   }
   const { uid } = useParams();
 
+  const prelogout = ()=>{
+    if(localStorage.getItem("logintoken"))
+    {
+      localStorage.removeItem("logintoken")
+      // console.log("local storage cleared");
+      
+			window.location.href = '/login'
+
+    }
+  }
+
   return (
   <div className='profile-div'>	         
     <div class="rounded bg-transparent mb-0">
@@ -138,11 +189,10 @@ function Profile()
 	              <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/> <p>Reload</p>
 	            </button>
 
-              {!user.isGuestUser && (
-                <button className="btn btn-green mt-3" onClick={logOut}>
-                  LogOut
-                </button>
-              )}
+              <button className="btn btn-green mt-3" onClick={prelogout}>
+                
+                LogOut
+              </button>
 
 
             </div>
@@ -156,11 +206,11 @@ function Profile()
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="labels">First Name <sm>(public)</sm></label>
-                        <input type="text" class="form-control" placeholder="first name" name="" value={mydata.fname}/>
+                        <input type="text" class="form-control" placeholder="first name" value={mydata.fname}/>
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Last Name <sm>(public)</sm></label>
-                        <input type="text" class="form-control" placeholder="surname" name="" value={mydata.lname}/>
+                        <input type="text" class="form-control" placeholder="surname" value={mydata.lname}/>
                     </div>
 
                     <div class="row mt-2">
